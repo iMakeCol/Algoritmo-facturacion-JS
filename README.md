@@ -33,6 +33,6 @@ Puedes encontrar mucho más de cómo utilizar este proyecto en nuestro [GitHub](
 ---
 ⌨️ con ❤️ por [iMakeCol](https://github.com/imakecol/) 😊
 
-<img src="imake.png" alt="iMake"/>
+<img src="iMake.png" alt="iMake"/>
 
 
