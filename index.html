@@ -1,0 +1,41 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" type="text/css" href="css/index.css" />
+      <title>Calculo IVA</title>
+    </head>
+    <body>
+      <div class="form-Calculo">
+        <form action="#" name="Rellenar">
+          <label for="customerPrecioP1">Precio Producto 1<em>&#x2a;</em></label
+          ><input 
+            id="precioP1" 
+            name="precioP1" 
+            required="" 
+            type="number" /><label
+            for="customerPrecioP2"
+            >Precio Producto 2<em>&#x2a;</em></label
+          ><input 
+            id="precioP2" 
+            name="precioP2" 
+            required="" 
+            type="number" /><label
+            for="customerPrecioP3"
+            >Precio Producto 3</label
+          ><input
+            id="precioP3"
+            name="precioP3"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            type="number"
+          />
+          <button name="Calcular" onClick="main()">Calcular</button>
+        </form>
+      </div>
+      <div id="Calculos">
+      </div>
+      <script src="index2.js"></script>
+    </body>
+  </html>
