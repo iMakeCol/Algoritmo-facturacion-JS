@@ -31,7 +31,7 @@ Puedes encontrar mucho más de cómo utilizar este proyecto en nuestro [GitHub](
 ## Autores ✒️
 
 ---
-⌨️ con ❤️ por [iMakeCol](https://github.com/imakecol/) 😊
+⌨️ Hecho con ❤️ por [iMakeCol](https://github.com/imakecol/) 😊
 
 <img src="iMake.png" alt="iMake"/>
 
