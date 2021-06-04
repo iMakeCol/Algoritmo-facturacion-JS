@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Facturar</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/CSS" href="../assets/css/facturar.css" />
+    <link rel="shortcut icon" type="image/ico" href="../assets/images/factura.png" />
+    <script src="https://kit.fontawesome.com/11509ce6e2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="menu.html">
+            <img src="../assets/images/factura.png" width="30" height="30" class="d-inline-block align-top" alt="" /> Sistema de Facturación
+        </a>
+        <button class="btn btn-dark" id="cerrarSes">Cerrar Sesión</button>
+    </nav>
+    <form class="formEvaluation">
+        <div class="title">
+            <h2>FACTURAR</h2>
+        </div>
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <label for="producto">Articulo</label>
+                                <input type="text" name="articulo" id="articulo" placeholder="Ingrese el articulo" class="form-control" /><br />
+
+                                <label for="especificacionP">Cantidad Producto</label>
+                                <input type="number" name="productoCan" id="productoCan" placeholder="Ingrese la cantidad del producto" class="form-control" required /><br />
+
+                                <label for="producto">Precio Unitario con iva</label>
+                                <input type="text" name="precioIva" id="precioIva" placeholder="Ingrese el precio con iva" class="form-control" /><br />
+
+                                <label for="especificacionP">Porcentaje del iva</label>
+                                <input type="text" name="porcentajeIva" id="porcentajeIva" placeholder="Ingrese el porcentaje del iva" class="form-control" required /><br />
+
+                                <center>
+                                    <button id="btnAgregar" type="button" class="btn btn-info"><i class="far fa-plus-square"></i>&nbsp;Crear</button>
+                                    <button id="verFacturas" type="button" class="btn btn-dark"><i class="fas fa-file-invoice"></i>&nbsp;Ver Facturas</button>
+                                    <button id="btnEliminar" type="button" class="btn btn-danger" data-toggle="modal"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal fade" id="facturaEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form" method="POST">
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="codigoFactura" class="control-label"><strong>Codigo Factura</strong></label>
+                        <input type="number" name="idFactEliminar" id="idFactEliminar" placeholder="Ingrese el Codigo de Factura" class="form-control" required /><br />
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="button" name="btnEliminarFac" id="btnEliminarFac">Eliminar</button>
+                        <button type="button" class="btn btn-outline-info my-2 my-sm-0" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="facturaEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form" method="POST">
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="producto">Codigo Factura</label>
+                        <input type="text" name="codFact" id="codFact" class="form-control" readonly onmousedown="return false;" />
+                    </div>
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="producto">Articulo</label>
+                        <input type="text" name="articuloFact" id="articuloFact" placeholder="Ingrese el articulo" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="especificacionP">Cantidad Producto</label>
+                        <input type="number" name="productoCan" id="productoCanFac" placeholder="Ingrese la cantidad del producto" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="producto">Precio Unitario con iva</label>
+                        <input type="text" name="precioIva" id="precioIvaFact" placeholder="Ingrese el precio con iva" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <span class="abs-center"></span>
+                        <label for="especificacionP">Porcentaje del iva</label>
+                        <input type="text" name="porcentajeIva" id="porcentajeIvaFac" placeholder="Ingrese el porcentaje del iva" class="form-control" required />
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button class="btn btn-success" type="button" name="EditarFac" id="EditarFac">Editar</button>
+                            <button type="button" class="btn btn-info my-2 my-sm-0" data-dismiss="modal">Cancelar</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <form id="facturasList" class="formEvaluation">
+        <div class="title">
+            <h2>FACTURAS</h2>
+        </div>
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover border-primary" id="table" border="2" width="100%">
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th id="idFactura">id Factura</th>
+                                                <th id="idFactura">Articulo</th>
+                                                <th id="nombreProducto">Cantidad</th>
+                                                <th id="valorPedido">Precio Unitario con iva</th>
+                                                <th id="precioConIva">Porcentaje del iva</th>
+                                                <th id="valorPedido">Valor sin Iva</th>
+                                                <th id="valorPedido">Subtotal</th>
+                                                <th id="valorPedido">Valor Iva</th>
+                                                <th id="valorPedido">Total con iva incluido</th>
+                                                <th id="valorPedido">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabla">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script src="../assets/jquery/jquery-3.3.1.min.js "></script>
+    <script src="../assets/popper/popper.min.js "></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js "></script>
+    <script src="../assets/js/accionesFacturas.js "></script>
+    <script src="../assets/js/consultarFacturas.js "></script>
+    <script src="../assets/js/facturar.js "></script>
+</body>
+
+</html>
