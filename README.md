@@ -16,9 +16,12 @@ Desarrollado en Visual Studio Code
 ```
 
 ## Colaboladores 🖇️
-
+```
 [Luis Carlos Martinez](https://github.com/LuisC111/) 
+```
+```
 [Hector Florez](https://github.com/hectorf25/)
+```
 
 ## Wiki 📖
 
